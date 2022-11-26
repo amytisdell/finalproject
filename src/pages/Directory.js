@@ -3,15 +3,16 @@ import { useState } from "react";
 import { useEffect } from "react";
 import DirectoryList from "../components/DirectoryList";
 
-
-function Directory() {
+function Directory(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedDirectory, setLoadedDirectory] = useState([]);
+
+
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-    "https://database-dd1fb-default-rtdb.firebaseio.com/directory.json"
+    "https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory"
     )
     .then((response) => {
      return response.json();
@@ -26,13 +27,14 @@ function Directory() {
         };
         employeesData.push(employeeData);
       }
+      
       setIsLoading(false);
       setLoadedDirectory(employeesData)
     });
   }, 
   
-  []); 
-
+  []);
+  
   if (isLoading) {
     return (
       <section>
@@ -44,7 +46,7 @@ function Directory() {
   return (
     <section>
       <Card>
-        <DirectoryList entries={loadedDirectory} />
+        <DirectoryList entries={loadedDirectory} /> 
       </Card>
     </section>
   );

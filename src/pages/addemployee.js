@@ -6,7 +6,7 @@ function AddEmployeePage() {
 const history = useHistory();
 
   function addEmployeeHandler(employeeData) {
-    fetch("https://database-dd1fb-default-rtdb.firebaseio.com/directory.json", {
+    fetch("https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory", {
       method: "POST",
       body: JSON.stringify(employeeData),
       headers: {
