@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 function DeleteRequestHooks() {
@@ -5,7 +6,7 @@ function DeleteRequestHooks() {
 
     useEffect(() => {
         // DELETE request using fetch inside useEffect React hook
-        fetch("https://database-dd1fb-default-rtdb.firebaseio.com/directory.json", { method: 'DELETE' })
+        fetch('https://jsonplaceholder.typicode.com/posts/1', { method: 'DELETE' })
             .then(() => setStatus('Delete successful'));
 
     // empty dependency array means this effect will only run once (like componentDidMount in classes)

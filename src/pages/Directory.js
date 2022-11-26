@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import DirectoryList from "../components/DirectoryList";
 
+
 function Directory() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedDirectory, setLoadedDirectory] = useState([]);
