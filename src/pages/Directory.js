@@ -7,8 +7,6 @@ function Directory(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [loadedDirectory, setLoadedDirectory] = useState([]);
 
-
-
   useEffect(() => {
     setIsLoading(true);
     fetch(
