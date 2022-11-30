@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import EmployeeForm from "../components/form";
+import classes from "./stylesheet.module.css"
 
 function AddEmployeePage() {
 
@@ -12,15 +13,16 @@ const history = useHistory();
       headers: {
         "Content-Type": "application/json",
       },
-    }).then(() => {
-      history.replace('/directory'); /*would rather have a success notification and form clear*/ 
+    }).then(alert("Employee Successfully Added"))
+    .then(() => {
+      history.replace('/directory'); 
     });
   }
 
   return (
     <div>
-      <h4> Submit new employee below: </h4>
-      <EmployeeForm onAddEmployee={addEmployeeHandler}></EmployeeForm>
+      <h4 className={classes.header}> Submit new employee below: </h4>
+      <EmployeeForm className={classes.form} onAddEmployee={addEmployeeHandler}></EmployeeForm>
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useRef } from "react";
+import classes from "../pages/stylesheet.module.css";
+
+
 
 function EmployeeForm(props) {
   const employeeInputRef = useRef();
@@ -21,7 +24,7 @@ function EmployeeForm(props) {
   }
 
   return (
-    <Form onSubmit={submitHandler}>
+    <Form className={classes.form} onSubmit={submitHandler}>
       <Form.Group>
         <Form.Label /*htmlFor="Name"*/>Name</Form.Label>
         <Form.Control

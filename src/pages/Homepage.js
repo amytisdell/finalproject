@@ -1,8 +1,9 @@
 import Card from "react-bootstrap/Card" 
+import classes from "./stylesheet.module.css";
 
 function Homepage() {
   return (
-    <div className="greeting">
+    <div className={classes.greeting}>
       <Card>
         <Card.Body>
           <Card.Text>

@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import { useState } from "react";
 import { useEffect } from "react";
 import DirectoryList from "../components/DirectoryList";
+import classes from "./stylesheet.module.css";
 
 function Directory(props) {
   const [isLoading, setIsLoading] = useState(true);
@@ -43,8 +44,11 @@ function Directory(props) {
 
   return (
     <section>
-      <Card>
-        <DirectoryList entries={loadedDirectory} /> 
+      <Card className={classes.card}>
+        <DirectoryList 
+        entries={loadedDirectory}
+        setLoadedDirectory={setLoadedDirectory}
+        /> 
       </Card>
     </section>
   );

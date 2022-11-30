@@ -1,31 +1,39 @@
-function DirectoryItem(props) {
-  //   const [deleteUser, useDeleteUser] = useState(false);
+import React from "react";
+import { useEffect } from "react";
 
-  function DeleteHandler() {
+function DirectoryItem({ id, name, extension, entries, setLoadedDirectory }) {
+  
+  useEffect(() => {
+    console.log("printing state from directoryItem: ", entries);
+  }, [entries]);
+
+  function deleteHandler() {
     fetch(
-      `https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory/${props.id}`,
+      `https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory/${id}`,
       {
         method: "DELETE",
       }
-    )
-      .then((result) => {
-        result.json().then(alert("employee successfully deleted"));
-      })
-      .then(console.log(props.id));
+    ).then(() => {
+      setLoadedDirectory((prevDirectory) => {
+        return prevDirectory.filter((employee) => employee.id !== id);
+      });
+    });
   }
+  
 
   function editNameHandler() {
-    console.log(props.name);
+    console.log(name);
     const newName = prompt("Please enter user name");
-    const sameId = props.id;
-    const ext = props.extension;
+    const sameId = id;
+    const ext = extension;
     const newNameData = { id: sameId, name: newName, extension: ext };
     console.log(newNameData);
     console.log(newName);
     console.log(sameId);
     console.log(ext);
+
     fetch(
-      `https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory/${props.id}`,
+      `https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -35,19 +43,19 @@ function DirectoryItem(props) {
       .then((response) => response.json())
       .then((newNameData) => {
         console.log("Success:", newNameData);
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.error("Error:", error);
       });
   }
 
   function editExtHandler() {
-    const sameName = props.name;
-    const sameId = props.id;
+    const sameName = name;
+    const sameId = id;
     const newExt = prompt("Please enter extension");
     const newExtData = { id: sameId, name: sameName, extension: newExt };
+
     fetch(
-      `https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory/${props.id}`,
+      `https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory/${id}`,
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -61,15 +69,21 @@ function DirectoryItem(props) {
       .catch((error) => {
         console.error("Error:", error);
       });
+
+  
+
+
+
   }
 
   return (
+
     <li /*className={classes.item}*/>
       <div>
-        <p>Employee Name: {props.name}</p>
-        <p>Employee Extension: {props.extension}</p>
+        <p>Employee Name: {name}</p>
+        <p>Employee Extension: {extension}</p>
 
-        <button onClick={DeleteHandler}> Delete </button>
+        <button onClick={deleteHandler}> Delete </button>
         <button onClick={editNameHandler}> Edit Name </button>
         <button onClick={editExtHandler}> Edit Extension </button>
       </div>
