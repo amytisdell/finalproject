@@ -1,8 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
+// import { useState } from "react"; reference for experiment on updating state within editNameHandler (see bottom of page)
 
 function DirectoryItem({ id, name, extension, entries, setLoadedDirectory }) {
-  
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   useEffect(() => {
     console.log("printing state from directoryItem: ", entries);
   }, [entries]);
@@ -19,18 +23,19 @@ function DirectoryItem({ id, name, extension, entries, setLoadedDirectory }) {
       });
     });
   }
-  
+
+  // const [count, setCount] = useState(0); reference for experiment on updating state within editNameHandler
+
+  // useEffect(() => {
+  //   console.log('Count is now: ', count);
+  // }, [count]);
+  // 30-32 reference for experiment on updating state within editNameHandler (see bottom of page)
 
   function editNameHandler() {
-    console.log(name);
     const newName = prompt("Please enter user name");
     const sameId = id;
     const ext = extension;
     const newNameData = { id: sameId, name: newName, extension: ext };
-    console.log(newNameData);
-    console.log(newName);
-    console.log(sameId);
-    console.log(ext);
 
     fetch(
       `https://635352bea9f3f34c3750caee.mockapi.io/disc/employeeDirectory/${id}`,
@@ -43,9 +48,12 @@ function DirectoryItem({ id, name, extension, entries, setLoadedDirectory }) {
       .then((response) => response.json())
       .then((newNameData) => {
         console.log("Success:", newNameData);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.error("Error:", error);
-      });
+      })
+      .then(refreshPage);
+    // .then(setCount(count + 1)); reference for experiment on updating state within editNameHandler (see bottom of page)
   }
 
   function editExtHandler() {
@@ -68,16 +76,11 @@ function DirectoryItem({ id, name, extension, entries, setLoadedDirectory }) {
       })
       .catch((error) => {
         console.error("Error:", error);
-      });
-
-  
-
-
-
+      })
+      .then(refreshPage);
   }
 
   return (
-
     <li /*className={classes.item}*/>
       <div>
         <p>Employee Name: {name}</p>
@@ -94,6 +97,5 @@ function DirectoryItem({ id, name, extension, entries, setLoadedDirectory }) {
 
 export default DirectoryItem;
 
-// const refreshPage= () => {
-//     window.location.reload(false)
-// }
+// I was able to successfully update the state of the component using the noted-out lines of code above. However, I was still unable to get the code to rerender
+// the Edit Name and Edit Extension without a manual page refresh.
